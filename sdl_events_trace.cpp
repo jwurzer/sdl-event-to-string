@@ -342,11 +342,19 @@ char *sdlEventToCString(char *dst, size_t n, const SDL_Event *event)
 #undef printf
 #endif
 
-void sdlEventToConsole(const SDL_Event *event)
+std::string sdlEventToString(const SDL_Event& event)
 {
 	char str[DST_STR_LEN + 1];
 	str[DST_STR_LEN] = '\0';
-	sdlEventToCString(str, DST_STR_LEN, event);
+	sdlEventToCString(str, DST_STR_LEN, &event);
+	return str;
+}
+
+void sdlEventToSdlLog(const SDL_Event& event)
+{
+	char str[DST_STR_LEN + 1];
+	str[DST_STR_LEN] = '\0';
+	sdlEventToCString(str, DST_STR_LEN, &event);
 	SDL_Log("%s", str);
 }
 
