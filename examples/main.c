@@ -2,7 +2,7 @@
 #include <SDL.h>
 #include <stdio.h>
 
-#include <sdl_events_debug.h>
+#include <sdl_event_to_string.h>
 
 #define MAX_EVT_STR 256
 

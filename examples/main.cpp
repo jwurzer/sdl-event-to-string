@@ -2,7 +2,7 @@
 #include <SDL.h>
 #include <iostream>
 
-#include <sdl_events_trace.h>
+#include <sdl_event_to_string.h>
 
 int main(int argc, char* args[])
 {

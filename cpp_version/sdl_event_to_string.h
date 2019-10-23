@@ -1,5 +1,5 @@
-#ifndef SDL_EVENTS_TRACE
-#define SDL_EVENTS_TRACE
+#ifndef SDL_EVENT_TO_STRING_H
+#define SDL_EVENT_TO_STRING_H
 
 #include <string>
 #include <SDL_events.h>

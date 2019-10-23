@@ -1,5 +1,5 @@
-#ifndef SDL_EVENTS_PRINT
-#define SDL_EVENTS_PRINT
+#ifndef SDL_EVENT_TO_STRING_H
+#define SDL_EVENT_TO_STRING_H
 
 #include "SDL_events.h"
 
@@ -9,7 +9,7 @@ extern "C" {
 
 char *sdlEventToCString(char *dst, size_t n, const SDL_Event *event);
 
-void sdlEventToConsole(const SDL_Event *event);
+void sdlEventToSdlLog(const SDL_Event *event);
 
 #ifdef __cplusplus
 }
