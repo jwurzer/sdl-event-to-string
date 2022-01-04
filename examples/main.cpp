@@ -49,7 +49,7 @@ int main(int argc, char* args[])
 
 	while (running) {
 		while (SDL_PollEvent(&e)) {
-			std::cout << sdlEventToString(e);
+			std::cout << "***" << sdlEventToString(e) << "***" << std::endl;
 			if (e.type == SDL_QUIT) {
 				running = false;
 			}
