@@ -26,7 +26,7 @@ Most code is from src\events\SDL_events.c (SDL 2.0.9, see: SDL_DebugPrintEvent()
 #include "sdl_event_to_string.h"
 #include <stdio.h>
 #include <string.h>
-#include "SDL.h"
+#include <SDL.h>
 
 #define TMP_STR_LEN 256
 #define DST_STR_LEN 256
@@ -342,10 +342,26 @@ char *sdlEventToCString(char *dst, size_t n, const SDL_Event *event)
 #undef printf
 #endif
 
-void sdlEventToSdlLog(const SDL_Event *event)
+void sdlEventToSdlLog(const SDL_Event* event)
 {
 	char str[DST_STR_LEN + 1];
 	str[DST_STR_LEN] = '\0';
 	sdlEventToCString(str, DST_STR_LEN, event);
 	SDL_Log("%s", str);
 }
+
+#ifdef __cplusplus
+void sdlEventToSdlLog(const SDL_Event& event)
+{
+	sdlEventToSdlLog(&event);
+}
+
+std::string sdlEventToString(const SDL_Event& event)
+{
+	char str[DST_STR_LEN + 1];
+	str[DST_STR_LEN] = '\0';
+	sdlEventToCString(str, DST_STR_LEN, &event);
+	return str;
+}
+#endif
+
