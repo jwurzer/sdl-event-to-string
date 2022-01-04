@@ -49,7 +49,7 @@ int main(int argc, char* args[])
 
 	while (running) {
 		while (SDL_PollEvent(&e)) {
-			printf("%s", sdlEventToCString(evtStr, MAX_EVT_STR, &e));
+			printf("***%s***\n", sdlEventToCString(evtStr, MAX_EVT_STR, &e));
 			if (e.type == SDL_QUIT) {
 				running = 0;
 			}
