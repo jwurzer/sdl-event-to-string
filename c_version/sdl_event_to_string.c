@@ -21,7 +21,8 @@
 
 /*
 Most code is from src\events\SDL_events.c
-current version is from 2.0.18.
+current version is from 2.0.20.
+SDL 2.0.20: see: SDL_LogEvent() from original SDL source code
 SDL 2.0.18: see: SDL_LogEvent() from original SDL source code
 old version was from 2.0.9.
 SDL 2.0.9: see: SDL_DebugPrintEvent() from original SDL source code
@@ -71,6 +72,8 @@ char *sdlEventToCString(char *dst, size_t n, const SDL_Event *event)
         return dst;
     }
     dst[0] = '\0';
+
+	///////////////////////// BEGIN OF COPY ///////////////////////
 
     char name[32];
     char details[128];
@@ -200,9 +203,10 @@ char *sdlEventToCString(char *dst, size_t n, const SDL_Event *event)
 
 
         SDL_EVENT_CASE(SDL_MOUSEWHEEL)
-            SDL_snprintf(details, sizeof (details), " (timestamp=%u windowid=%u which=%u x=%d y=%d direction=%s)",
+            SDL_snprintf(details, sizeof (details), " (timestamp=%u windowid=%u which=%u x=%d y=%d preciseX=%f preciseY=%f direction=%s)",
                     (uint) event->wheel.timestamp, (uint) event->wheel.windowID,
                     (uint) event->wheel.which, (int) event->wheel.x, (int) event->wheel.y,
+                    event->wheel.preciseX, event->wheel.preciseY,
                     event->wheel.direction == SDL_MOUSEWHEEL_NORMAL ? "normal" : "flipped");
             break;
 
@@ -331,7 +335,6 @@ char *sdlEventToCString(char *dst, size_t n, const SDL_Event *event)
             }
             break;
     }
-
 #if 0 // set 0 --> no logging only store to string dst
     if (name[0]) {
         SDL_Log("SDL EVENT: %s%s", name, details);
@@ -339,6 +342,21 @@ char *sdlEventToCString(char *dst, size_t n, const SDL_Event *event)
 #endif
 
     #undef uint
+
+    ///////////////////////// END OF COPY ///////////////////////
+
+    if (!name[0]) {
+        #define SDL_EVENT_CASE(x) case x: SDL_strlcpy(name, #x, sizeof (name));
+        switch (event->type) {
+            SDL_EVENT_CASE(SDL_POLLSENTINEL) SDL_snprintf(details, sizeof (details), " (timestamp=%u)", (uint) event->common.timestamp); break;
+        }
+        #undef SDL_EVENT_CASE
+    }
+
+    if (!name[0]) {
+		SDL_snprintf(name, sizeof(name), "unknown");
+        SDL_snprintf(details, sizeof(details), " type  %" PRIx32, event->type);
+    }
 
     if (name[0]) {
         int len = strlen(name);
