@@ -20,17 +20,17 @@ if (CMAKE_COMPILER_IS_GNUCXX)
 	set (CMAKE_CXX_FLAGS_RELEASE  "-O3")
 endif ()
 
-file(GLOB_RECURSE PRJ_HEADERFILES cpp_version/*.h)
-file(GLOB_RECURSE PRJ_SOURCEFILES cpp_version/*.cpp examples/*.cpp)
+file(GLOB_RECURSE PRJ_HEADERFILES evt2str/*.h)
+file(GLOB_RECURSE PRJ_SOURCEFILES evt2str/*.cpp examples/*.cpp)
 
-file(GLOB_RECURSE PRJ_C_HEADERFILES c_version/*.h)
-file(GLOB_RECURSE PRJ_C_SOURCEFILES c_version/*.c examples/*.c)
+file(GLOB_RECURSE PRJ_C_HEADERFILES evt2str/*.h)
+file(GLOB_RECURSE PRJ_C_SOURCEFILES evt2str/*.c examples/*.c)
 
 
 
 add_executable(cpp-example ${PRJ_HEADERFILES} ${PRJ_SOURCEFILES})
 
-target_include_directories(cpp-example PRIVATE "${CMAKE_SOURCE_DIR}/cpp_version")
+target_include_directories(cpp-example PRIVATE "${CMAKE_SOURCE_DIR}/evt2str")
 target_include_directories(cpp-example PRIVATE ${SDL2_INCLUDE_DIR})
 
 target_link_libraries(cpp-example ${SDL2_LIBRARY})
@@ -39,7 +39,7 @@ target_link_libraries(cpp-example ${SDL2_LIBRARY})
 
 add_executable(c-example ${PRJ_C_HEADERFILES} ${PRJ_C_SOURCEFILES})
 
-target_include_directories(c-example PRIVATE "${CMAKE_SOURCE_DIR}/c_version")
+target_include_directories(c-example PRIVATE "${CMAKE_SOURCE_DIR}/evt2str")
 target_include_directories(c-example PRIVATE ${SDL2_INCLUDE_DIR})
 
 target_link_libraries(c-example ${SDL2_LIBRARY})
