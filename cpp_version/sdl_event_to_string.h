@@ -1,1 +1,0 @@
-../c_version/sdl_event_to_string.h
