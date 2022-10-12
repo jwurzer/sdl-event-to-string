@@ -341,7 +341,7 @@ char *sdlEventToCString(char *dst, size_t n, const SDL_Event *event)
     }
 #endif
 
-    #undef uint
+    //#undef uint // don't undefine because for using later
 
     ///////////////////////// END OF COPY ///////////////////////
 
@@ -355,7 +355,7 @@ char *sdlEventToCString(char *dst, size_t n, const SDL_Event *event)
 
     if (!name[0]) {
 		SDL_snprintf(name, sizeof(name), "unknown");
-        SDL_snprintf(details, sizeof(details), " type  %" PRIx32, event->type);
+        SDL_snprintf(details, sizeof(details), " type  %x", (unsigned int)event->type);
     }
 
     if (name[0]) {
