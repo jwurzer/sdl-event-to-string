@@ -4,15 +4,17 @@ cmake_minimum_required(VERSION 3.0.0)
 cmake_policy(VERSION 3.0.0)
 project(SDL-Evt-to-Str)
 
+set(WIN_SDL2_PATH "C:/Development/Library/SDL2-2.24.1")
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/Modules/")
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SDL2_PATH "C:/Development/Library")
-set(SDL2_IMAGE_PATH "C:/Development/Library")
+if (WIN32)
+	set(SDL2_PATH ${WIN_SDL2_PATH})
+endif ()
 
 find_package(SDL2 REQUIRED)
-#find_package(SDL2_image REQUIRED)
 
 if (CMAKE_COMPILER_IS_GNUCXX)
 	set (CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wextra -Winit-self -Wstrict-aliasing -Wfloat-equal -Wno-comment -Wno-missing-field-initializers -Wno-unused -fPIC -felide-constructors -Wreorder")
