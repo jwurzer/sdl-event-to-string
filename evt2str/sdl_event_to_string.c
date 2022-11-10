@@ -41,6 +41,7 @@ SDL 2.0.9: see: SDL_DebugPrintEvent() from original SDL source code
 
 #if defined(_MSC_VER)
 #define snprintf(buf,len, format,...) _snprintf_s(buf, len,len, format, __VA_ARGS__)
+#define strncpy(dst, src, dstsize) strncpy_s(dst, dstsize, src, strlen(src))
 #endif
 
 #define printf(f_, ...) { \
