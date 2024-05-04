@@ -21,11 +21,12 @@
 
 /*
 Most code is from src\events\SDL_events.c
-current version is from 2.0.20.
-SDL 2.0.20: see: SDL_LogEvent() from original SDL source code
-SDL 2.0.18: see: SDL_LogEvent() from original SDL source code
-old version was from 2.0.9.
-SDL 2.0.9: see: SDL_DebugPrintEvent() from original SDL source code
+* Add SDL_WINDOWEVENT_ICCPROF_CHANGED and SDL_WINDOWEVENT_DISPLAY_CHANGED
+* current version is from 2.0.20.
+ SDL 2.0.20: see: SDL_LogEvent() from original SDL source code
+ SDL 2.0.18: see: SDL_LogEvent() from original SDL source code
+* old version was from 2.0.9.
+ SDL 2.0.9: see: SDL_DebugPrintEvent() from original SDL source code
 */
 
 #include "sdl_event_to_string.h"
@@ -147,7 +148,9 @@ char *sdlEventToCString(char *dst, size_t n, const SDL_Event *event)
                 SDL_WINDOWEVENT_CASE(SDL_WINDOWEVENT_FOCUS_LOST);
                 SDL_WINDOWEVENT_CASE(SDL_WINDOWEVENT_CLOSE);
                 SDL_WINDOWEVENT_CASE(SDL_WINDOWEVENT_TAKE_FOCUS);
-                SDL_WINDOWEVENT_CASE(SDL_WINDOWEVENT_HIT_TEST);
+				SDL_WINDOWEVENT_CASE(SDL_WINDOWEVENT_HIT_TEST);
+                SDL_WINDOWEVENT_CASE(SDL_WINDOWEVENT_ICCPROF_CHANGED);
+				SDL_WINDOWEVENT_CASE(SDL_WINDOWEVENT_DISPLAY_CHANGED);
                 #undef SDL_WINDOWEVENT_CASE
                 default: SDL_strlcpy(name2, "UNKNOWN (bug? fixme?)", sizeof (name2)); break;
             }
